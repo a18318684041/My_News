@@ -1,4 +1,4 @@
-package com.example.administrator.my_news;
+package com.example.administrator.my_news.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

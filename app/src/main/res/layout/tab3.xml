@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context="com.example.administrator.my_news.MainActivity"
-    >
+    tools:context="com.example.administrator.my_news.Activity.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyleview"

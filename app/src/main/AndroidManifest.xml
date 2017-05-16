@@ -8,13 +8,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.MainActivity">
 
         </activity>
-        <activity android:name=".GuideActivity">
+        <activity android:name=".Activity.GuideActivity">
 
         </activity>
-        <activity android:name=".WelcomeActivity">
+        <activity android:name=".Activity.Activity_Main"/>
+        <activity android:name=".Activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

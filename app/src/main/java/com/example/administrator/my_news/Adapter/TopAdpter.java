@@ -1,14 +1,17 @@
 package com.example.administrator.my_news.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.administrator.my_news.Activity.Activity_Main;
 import com.example.administrator.my_news.R;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.BitmapCallback;
@@ -26,11 +29,13 @@ public class TopAdpter extends RecyclerView.Adapter<TopAdpter.ViewHolder> {
     private Context context;
     private List<String> titles;
     private List<String> img_urls;
+    private List<String> urls;
 
-    public TopAdpter(Context context,List<String> titles,List<String> img_urls){
+    public TopAdpter(Context context,List<String> titles,List<String> img_urls,List<String> urls){
         this.context = context;
         this.titles = titles;
         this.img_urls = img_urls;
+        this.urls = urls;
     }
 
     @Override
@@ -66,9 +71,20 @@ public class TopAdpter extends RecyclerView.Adapter<TopAdpter.ViewHolder> {
                                 holder.img.setImageBitmap(response);
                             }
                         });
-
             }
         }).start();
+
+        //跳转到详情页面
+        holder.ln.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, Activity_Main.class);
+                //传递url
+                intent.putExtra("url",urls.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -79,10 +95,12 @@ public class TopAdpter extends RecyclerView.Adapter<TopAdpter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView txt;
         private ImageView img;
+        private LinearLayout ln;
         public ViewHolder(View itemView) {
             super(itemView);
             txt = (TextView) itemView.findViewById(R.id.txt);
             img = (ImageView) itemView.findViewById(R.id.img);
+            ln = (LinearLayout) itemView.findViewById(R.id.ln);
         }
     }
 }

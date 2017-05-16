@@ -1,4 +1,4 @@
-package com.example.administrator.my_news;
+package com.example.administrator.my_news.Activity;
 
 import android.support.v4.view.PagerAdapter;
 import android.view.View;

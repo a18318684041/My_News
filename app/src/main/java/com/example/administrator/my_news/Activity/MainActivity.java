@@ -1,4 +1,4 @@
-package com.example.administrator.my_news;
+package com.example.administrator.my_news.Activity;
 
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -17,6 +17,7 @@ import com.example.administrator.my_news.Fragment.tab1;
 import com.example.administrator.my_news.Fragment.tab2;
 import com.example.administrator.my_news.Fragment.tab3;
 import com.example.administrator.my_news.Fragment.tab4;
+import com.example.administrator.my_news.R;
 import com.example.administrator.my_news.Receiver.Myreceiver;
 
 import java.util.ArrayList;

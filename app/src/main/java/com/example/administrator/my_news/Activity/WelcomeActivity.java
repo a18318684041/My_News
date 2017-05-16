@@ -1,9 +1,12 @@
-package com.example.administrator.my_news;
+package com.example.administrator.my_news.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.administrator.my_news.R;
+import com.example.administrator.my_news.Utils.SPUtils;
 
 public class WelcomeActivity extends AppCompatActivity {
 

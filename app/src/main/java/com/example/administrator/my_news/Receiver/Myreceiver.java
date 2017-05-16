@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 
 public class Myreceiver extends BroadcastReceiver {
+    //网络状态监听器
     @Override
     public void onReceive(Context context, Intent intent) {
         System.out.println("网络状态发生变化");
