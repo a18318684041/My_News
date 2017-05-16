@@ -48,13 +48,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        >
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="3dip"
             android:progressDrawable="@drawable/pg"
             android:visibility="gone" />
 
@@ -64,4 +65,17 @@
             android:layout_height="match_parent"
             android:background="#33ff0000" />
     </RelativeLayout>
+<!--    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="确认发送" />
+    </LinearLayout>-->
+
 </LinearLayout>

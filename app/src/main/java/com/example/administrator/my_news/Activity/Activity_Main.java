@@ -1,9 +1,11 @@
 package com.example.administrator.my_news.Activity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.view.KeyEvent;
@@ -20,13 +22,15 @@ import android.widget.Toast;
 
 import com.example.administrator.my_news.R;
 
+import java.lang.reflect.Method;
+
 public class Activity_Main extends AppCompatActivity {
     private ImageView img_back;
     private ImageView img_setting;
     private WebView webView;
     private ProgressBar progressBar;
 
-
+    WebSettings seting;
     PopupMenu popupMenu;
     Menu menu;
 
@@ -49,6 +53,8 @@ public class Activity_Main extends AppCompatActivity {
         menu = popupMenu.getMenu();
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.demo07_popup_menu, menu);
+        setIconEnable(menu,true);
+
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
 
@@ -66,8 +72,9 @@ public class Activity_Main extends AppCompatActivity {
         Intent intent = getIntent();
         final String url = intent.getStringExtra("url");
         webView.loadUrl(url);
-        WebSettings seting = webView.getSettings();
+        seting = webView.getSettings();
         seting.setJavaScriptEnabled(true);//设置webview支持javascript脚本
+        seting.setSupportZoom(true);
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -96,6 +103,7 @@ public class Activity_Main extends AppCompatActivity {
                     case R.id.item1:
                         Toast.makeText(Activity_Main.this, "收藏",
                                 Toast.LENGTH_LONG).show();
+/*                       seting.setTextSize(WebSettings.TextSize.LARGEST);*/
                         break;
                     case R.id.item2:
                         Intent shareIntent = new Intent();
@@ -116,15 +124,63 @@ public class Activity_Main extends AppCompatActivity {
                         Toast.makeText(Activity_Main.this, "转发",
                                 Toast.LENGTH_LONG).show();
                         break;
+                    case R.id.item5:
+                        Toast.makeText(Activity_Main.this, "字体",
+                                Toast.LENGTH_LONG).show();
+                        final String[] items = {"小","最小","正常","大","最大"};
+                        AlertDialog dialog = new AlertDialog.Builder(Activity_Main.this).setTitle("字体大小").setIcon(R.drawable.font)
+                                .setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+/*                                        Toast.makeText(Activity_Main.this, items[which], Toast.LENGTH_SHORT).show();*/
+                                        switch (which) {
+
+                                            case 0:
+                                                seting.setTextSize(WebSettings.TextSize.SMALLEST);
+                                                break;
+                                            case 1:
+                                                seting.setTextSize(WebSettings.TextSize.SMALLER);
+                                                break;
+                                            case 2:
+                                                seting.setTextSize(WebSettings.TextSize.NORMAL);
+                                                break;
+                                            case 3:
+                                                seting.setTextSize(WebSettings.TextSize.LARGER);
+                                                break;
+                                            case 4:
+                                                seting.setTextSize(WebSettings.TextSize.LARGEST);
+                                                break;
+                                        }
+                                        dialog.dismiss();
+                                    }
+                                }).create();
+                        dialog.show();
+                        break;
                     default:
                         break;
                 }
                 return false;
             }
         });
-
     }
 
+
+    private void setIconEnable(Menu menu, boolean enable)
+    {
+        try
+        {
+            Class<?> clazz = Class.forName("com.android.internal.view.menu.MenuBuilder");
+            Method m = clazz.getDeclaredMethod("setOptionalIconsVisible", boolean.class);
+            m.setAccessible(true);
+            //传入参数
+            m.invoke(menu, enable);
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
     //设置返回键动作（防止按返回键直接退出程序)
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
