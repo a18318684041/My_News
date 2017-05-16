@@ -15,6 +15,8 @@
 
         </activity>
         <activity android:name=".Activity.Activity_Main"/>
+        <activity android:name=".Activity.Activity_zhuye"/>
+        <activity android:name=".Activity.Activity_yaowen"/>
         <activity android:name=".Activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.Activity_user"></activity>
         <receiver android:name=".Receiver.Myreceiver"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--获取wifi网络状态的信息 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />

@@ -53,7 +53,6 @@ public class Activity_Main extends AppCompatActivity {
         menu = popupMenu.getMenu();
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.demo07_popup_menu, menu);
-        setIconEnable(menu,true);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -90,7 +89,9 @@ public class Activity_Main extends AppCompatActivity {
         img_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setIconEnable(menu,true);
                 popupMenu.show();
+
             }
         });
 
