@@ -39,8 +39,11 @@ public class Activity_user extends AppCompatActivity {
         img_zhuye = (ImageView) findViewById(R.id.img);
         tv_zhuye = (TextView) findViewById(R.id.tv);
         ln_yonghu = (LinearLayout) findViewById(R.id.ln_yonghu);
+
         ln_yonghu.setBackgroundColor(Color.parseColor("#DC143C"));
         tv_zhuye.setTextColor(Color.parseColor("#ffffff"));
+
+
         ln_zhuye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

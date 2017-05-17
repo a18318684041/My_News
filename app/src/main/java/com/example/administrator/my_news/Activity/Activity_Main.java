@@ -3,6 +3,7 @@ package com.example.administrator.my_news.Activity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -16,13 +17,18 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.administrator.my_news.R;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 public class Activity_Main extends AppCompatActivity {
     private ImageView img_back;
@@ -34,15 +40,70 @@ public class Activity_Main extends AppCompatActivity {
     PopupMenu popupMenu;
     Menu menu;
 
+    private  ImageView imt_share;
+    private ImageView img_shoucang;
+    private boolean isFirst = true;
+    private ImageView img_comment;
+
+    private Button btn_send;
+    private EditText edt_comment;
+    private SQLiteDatabase db;
+
+    String  title;
+    String url;
+    String img_urls;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xiangqing);
+        Intent intent = getIntent();
+        title = intent.getStringExtra("title");
+        url = intent.getStringExtra("url");
+        img_urls = intent.getStringExtra("img_url");
         initView();
+        initbottom();
     }
 
-    private void initView() {
+    private void initbottom() {
+        img_comment = (ImageView) findViewById(R.id.img_pinglun);
+        img_shoucang = (ImageView) findViewById(R.id.img_shoucang);
+        btn_send = (Button) findViewById(R.id.btn_send);
+        edt_comment = (EditText) findViewById(R.id.edt_comment);
+        //评论
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String content = edt_comment.getText().toString();
+                if(content!=null) {
+                    Toast.makeText(Activity_Main.this, "评论成功", Toast.LENGTH_LONG).show();
+                    edt_comment.setText("");
+                }
+            }
+        });
+        //收藏
+        img_shoucang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isFirst){
+                    db = openOrCreateDatabase("MyNews",MODE_PRIVATE,null);
+                    db.execSQL("CREATE TABLE IF NOT EXISTS info (titles varchar(50), urls varchar(50), img_urls varchar(50))");
+                    db.execSQL("insert into info(titles,urls,img_urls) values('" + title + "','" + url + "','" + img_urls + "')");
+                    img_shoucang.setImageResource(R.drawable.s2);
+                    Toast.makeText(Activity_Main.this,"收藏新闻成功",Toast.LENGTH_LONG).show();
+                    isFirst = false;
+                }else{
+                    db.execSQL("delete from info where titles = ?",new String[]{title});
+                    img_shoucang.setImageResource(R.drawable.s1);
+                    Toast.makeText(Activity_Main.this,"取消收藏成功",Toast.LENGTH_LONG).show();
+                    isFirst =true;
+                }
+            }
+        });
+    }
 
+
+    private void initView() {
         img_back = (ImageView) findViewById(R.id.img_back);
         img_setting = (ImageView) findViewById(R.id.img_setting);
         webView = (WebView) findViewById(R.id.webView);
@@ -94,6 +155,18 @@ public class Activity_Main extends AppCompatActivity {
 
             }
         });
+        imt_share = (ImageView) findViewById(R.id.img_share);
+        //分享
+        imt_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "我看到一篇精彩的新闻，网址是"+url);
+                shareIntent.setType("text/plain");
+                startActivity(Intent.createChooser(shareIntent, "分享到"));
+            }
+        });
 
         // 监听事件
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -104,7 +177,10 @@ public class Activity_Main extends AppCompatActivity {
                     case R.id.item1:
                         Toast.makeText(Activity_Main.this, "收藏",
                                 Toast.LENGTH_LONG).show();
-/*                       seting.setTextSize(WebSettings.TextSize.LARGEST);*/
+                        Intent intent = new Intent();
+                        intent.setClass(Activity_Main.this, Activity_shoucang.class);
+                        startActivity(intent);
+                        finish();
                         break;
                     case R.id.item2:
                         Intent shareIntent = new Intent();
@@ -194,5 +270,10 @@ public class Activity_Main extends AppCompatActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

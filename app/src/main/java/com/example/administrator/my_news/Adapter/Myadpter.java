@@ -21,23 +21,20 @@ import java.util.List;
 import okhttp3.Call;
 
 /**
- * Created by Administrator on 2017/5/15 0015.
+ * Created by Administrator on 2017/5/17 0017.
  */
 
-public class TopAdpter extends RecyclerView.Adapter<TopAdpter.ViewHolder> {
-
+public class Myadpter extends RecyclerView.Adapter<Myadpter.ViewHolder> {
     private Context context;
     private List<String> titles;
     private List<String> img_urls;
     private List<String> urls;
-
-    public TopAdpter(Context context,List<String> titles,List<String> img_urls,List<String> urls){
+    public Myadpter(Context context,List<String> titles,List<String> img_urls,List<String> urls){
         this.context = context;
         this.titles = titles;
         this.img_urls = img_urls;
         this.urls = urls;
     }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,parent,false);
@@ -82,7 +79,7 @@ public class TopAdpter extends RecyclerView.Adapter<TopAdpter.ViewHolder> {
                 intent.setClass(context, Activity_Main.class);
                 //传递url
                 intent.putExtra("url",urls.get(position));
-                intent.putExtra("img_url",img_urls.get(position));
+                intent.putExtra("img",img_urls.get(position));
                 intent.putExtra("title",titles.get(position));
                 context.startActivity(intent);
             }
