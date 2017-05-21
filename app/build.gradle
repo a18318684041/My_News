@@ -27,9 +27,14 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.2.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.2.0'
-    compile 'com.squareup.okhttp3:okhttp:3.6.0'
-    compile 'com.google.code.gson:gson:2.2.4'
+    /*    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+        compile 'com.google.code.gson:gson:2.2.4'*/
     compile 'com.android.support:recyclerview-v7:25.2.0'
     compile 'com.zhy:okhttputils:2.6.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    /*解决bmob包与gson、OKhttpjar包冲突*/
+    compile('com.google.code.gson:gson:2.2.4') {
+        exclude group: 'com.squareup.okhttp3:okhttp:3.6.0'
+    }
+    compile 'cn.bmob.android:bmob-sdk:3.5.5'
 }

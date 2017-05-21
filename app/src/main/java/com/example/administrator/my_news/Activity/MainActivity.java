@@ -85,8 +85,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this,Activity_yaowen.class);
+                intent.setClass(MainActivity.this,Activity_test.class);
                 startActivity(intent);
+
             }
         });
         ln_yonghu.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, Activity_user.class);
+                overridePendingTransition(R.anim.out_to_left, R.anim.in_from_right);
                 startActivity(intent);
             }
         });

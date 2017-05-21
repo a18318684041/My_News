@@ -16,8 +16,12 @@
         </activity>
         <activity android:name=".Activity.Activity_shoucang"/>
         <activity android:name=".Activity.Activity_Main"/>
-        <activity android:name=".Activity.Activity_yaowen"/>
         <activity android:name=".Activity.Activity_comment"/>
+        <activity android:name=".Activity.Activity_login"/>
+        <activity android:name=".Activity.Activity_test">
+
+        </activity>
+        <activity android:name=".Activity.Activity_Tuku" />
         <activity android:name=".Activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,4 +41,5 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
 </manifest>

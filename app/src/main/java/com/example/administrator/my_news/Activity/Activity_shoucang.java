@@ -31,6 +31,7 @@ public class Activity_shoucang extends AppCompatActivity {
     private List<String> urls;
     private SQLiteDatabase db;
     private ImageView img_back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +40,12 @@ public class Activity_shoucang extends AppCompatActivity {
     }
 
     private void initViews() {
-       img_back = (ImageView) findViewById(R.id.img_back);
+        img_back = (ImageView) findViewById(R.id.img_back);
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(Activity_shoucang.this,MainActivity.class);
+                intent.setClass(Activity_shoucang.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -52,9 +53,9 @@ public class Activity_shoucang extends AppCompatActivity {
         titles = new ArrayList<>();
         img_urls = new ArrayList<>();
         urls = new ArrayList<>();
-        db = openOrCreateDatabase("MyNews",MODE_PRIVATE,null);
-        Cursor cursor = db.rawQuery("select * from info",null);
-        if(cursor!=null) {
+        db = openOrCreateDatabase("MyNews", MODE_PRIVATE, null);
+        Cursor cursor = db.rawQuery("select * from info", null);
+        if (cursor != null) {
             while (cursor.moveToNext()) {
                 String title = cursor.getString(cursor.getColumnIndex("titles"));
                 String url = cursor.getString(cursor.getColumnIndex("urls"));
@@ -67,7 +68,7 @@ public class Activity_shoucang extends AppCompatActivity {
             db.close();
         }
         recyclerView = (RecyclerView) findViewById(R.id.recyleview);
-        myadpter = new Myadpter(Activity_shoucang.this,titles,img_urls,urls);
+        myadpter = new Myadpter(Activity_shoucang.this, titles, img_urls, urls);
         LinearLayoutManager manger = new LinearLayoutManager(Activity_shoucang.this);
         recyclerView.setLayoutManager(manger);
         //绘制分割线

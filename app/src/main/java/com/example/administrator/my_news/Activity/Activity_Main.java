@@ -55,6 +55,7 @@ public class Activity_Main extends AppCompatActivity {
     String title;
     String url;
     String img_urls;
+    private boolean isNight = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,8 +122,6 @@ public class Activity_Main extends AppCompatActivity {
         img_back = (ImageView) findViewById(R.id.img_back);
         img_setting = (ImageView) findViewById(R.id.img_setting);
         webView = (WebView) findViewById(R.id.webView);
-
-
         //菜单栏的加载
         popupMenu = new PopupMenu(this, img_setting);
         menu = popupMenu.getMenu();
@@ -130,8 +129,6 @@ public class Activity_Main extends AppCompatActivity {
         menuInflater.inflate(R.menu.demo07_popup_menu, menu);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-
         //跳转回主界面
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,7 +145,12 @@ public class Activity_Main extends AppCompatActivity {
         webView.loadUrl(url);
         seting = webView.getSettings();
         seting.setJavaScriptEnabled(true);//设置webview支持javascript脚本
+
+        //设置可缩放
         seting.setSupportZoom(true);
+        seting.setBuiltInZoomControls(true); //设置内置的缩放控件。
+
+
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -222,8 +224,15 @@ public class Activity_Main extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
                         break;
                     case R.id.item4:
-                        Toast.makeText(Activity_Main.this, "转发",
-                                Toast.LENGTH_LONG).show();
+                        if(isNight){
+                            //无图模式
+                            seting.setLoadsImagesAutomatically(isNight);
+                            isNight = true;
+                        }else {
+                            //有图模式
+                            seting.setLoadsImagesAutomatically(isNight);
+                            isNight = false;
+                        }
                         break;
                     case R.id.item5:
                         Toast.makeText(Activity_Main.this, "字体",
@@ -234,7 +243,6 @@ public class Activity_Main extends AppCompatActivity {
 
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-/*                                        Toast.makeText(Activity_Main.this, items[which], Toast.LENGTH_SHORT).show();*/
                                         switch (which) {
 
                                             case 0:
@@ -284,10 +292,12 @@ public class Activity_Main extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (webView.canGoBack()) {//当webview不是处于第一页面时，返回上一个页面
+            if (webView.canGoBack()) {
+                //当webview不是处于第一页面时，返回上一个页面
                 webView.goBack();
                 return true;
-            } else {//当webview处于第一页面时,直接退出程序
+            } else {
+                //当webview处于第一页面时,直接退出程序
                 System.exit(0);
             }
         }

@@ -31,14 +31,52 @@
                 android:textSize="25sp" />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
-
-    <TextView
+    <LinearLayout
         android:id="@+id/vp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="12"
-        android:text="我是用户中心"
-        android:background="#ffffff" />
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <EditText
+            android:id="@+id/edt_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入手机号" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edt_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:hint="请输入验证码" />
+
+            <Button
+                android:id="@+id/btn_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="获取验证码" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff0000"
+            android:text="一键登录注册" />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/ln_zhuye"
@@ -85,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="要闻" />
+                android:text="图库" />
         </LinearLayout>
 
 
@@ -97,15 +135,15 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/img"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:id="@+id/img"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/yonghu" />
 
             <TextView
-                android:layout_width="wrap_content"
                 android:id="@+id/tv"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="用户" />

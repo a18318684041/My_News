@@ -3,6 +3,6 @@
     <item android:id="@+id/item1" android:icon="@drawable/shoucang"  android:title="收藏" />
     <item android:id="@+id/item2" android:icon="@drawable/share"      android:title="分享" />
     <item android:id="@+id/item3" android:icon="@drawable/comment"    android:title="评论" />
-    <item android:id="@+id/item4" android:icon="@drawable/zhuanfa"    android:title="转发" />
+    <item android:id="@+id/item4" android:icon="@drawable/zhuanfa"    android:title="无图模式" />
     <item android:id="@+id/item5"  android:icon="@drawable/font"        android:title="正文字体" />
 </menu>
